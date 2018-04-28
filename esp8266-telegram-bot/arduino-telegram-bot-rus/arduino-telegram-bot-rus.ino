@@ -197,7 +197,7 @@ void loop()
     // отправляем пять сообщений
     if ((distanceSensor.measureDistanceCm()) < distance_min && alarm_count < 3) // если расстояние меньше distance_min, то отправляем сообщение
     {
-      bot.sendMessage(chat_id, message, ""); give chat_id - идентификатор чата которому пойдет сообщение
+      bot.sendMessage(chat_id, message, ""); // give chat_id - идентификатор чата которому пойдет сообщение
       bot.sendMessage("номер-вашей-комнаты1", message, ""); // отправка в несколько каналов, комнат. 
       bot.sendMessage("номер-вашей-комнаты2", message, ""); // отправка в несколько каналов, комнат. 
     }
