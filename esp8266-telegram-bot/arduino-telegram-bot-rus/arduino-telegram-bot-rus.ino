@@ -194,15 +194,15 @@ void loop()
     // String text = bot.messages[0].text;
     // String from_name = bot.messages[0].from_name;
 
-    // отправляем пять сообщений
-    if ((distanceSensor.measureDistanceCm()) < distance_min && alarm_count < 3) // если расстояние меньше distance_min, то отправляем сообщение
+    // отправляем сообщение, если расстояние меннее distance_min и если количество сообщений менее 5
+    if ((distanceSensor.measureDistanceCm()) < distance_min && alarm_count < 5) // если расстояние меньше distance_min, то отправляем сообщение
     {
       bot.sendMessage(chat_id, message, ""); // give chat_id - идентификатор чата которому пойдет сообщение
-      bot.sendMessage("номер-вашей-комнаты1", message, ""); // отправка в несколько каналов, комнат. 
-      bot.sendMessage("номер-вашей-комнаты2", message, ""); // отправка в несколько каналов, комнат. 
+      bot.sendMessage("номер-вашей-комнаты1", message, ""); // отправка в несколько каналов, комнат.
+      bot.sendMessage("номер-вашей-комнаты2", message, ""); // отправка в несколько каналов, комнат.
     }
     alarm_count++;
-    if(alarm_count>5)alarm_count=0; // ограничение количества сообщений, чтобы не забивать канал сообщениями. 
+    if(alarm_count>25)alarm_count=0; // ограничение количества сообщений. 
 
     // Serial.print("Checking messages - ");
     int numNewMessages = bot.getUpdates(bot.last_message_received + 1);
