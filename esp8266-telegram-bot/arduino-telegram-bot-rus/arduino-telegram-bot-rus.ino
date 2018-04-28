@@ -188,7 +188,6 @@ void loop()
   uint16_t alarm_count = 0;
   if (millis() > lastTimeScan + BOT_SCAN_MESSAGE_INTERVAL)
   {
-
     String chat_id = String(bot.messages[0].chat_id);
     String message = " distance: " + (String)distanceSensor.measureDistanceCm() + " centimeter " + " chat_id: " + chat_id + "\n";
     // String text = bot.messages[0].text;
