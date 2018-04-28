@@ -202,7 +202,7 @@ void loop()
       bot.sendMessage("номер-вашей-комнаты2", message, ""); // отправка в несколько каналов, комнат.
     }
     alarm_count++;
-    if(alarm_count>25)alarm_count=0; // ограничение количества сообщений. 
+    if(alarm_count>25)alarm_count=0; // ограничение количества сообщений.
 
     // Serial.print("Checking messages - ");
     int numNewMessages = bot.getUpdates(bot.last_message_received + 1);
