@@ -4,7 +4,7 @@
 * *
 * written by Giacarlo Bacchio (Gianbacchio on Github) *
 * adapted by Brian Lough *
-* https:// github.com/alvarowolfx/esp8266-telegram-bot
+* https://github.com/alvarowolfx/esp8266-telegram-bot
 *******************************************************************/
 
 #include <ESP8266WiFi.h>
@@ -27,7 +27,7 @@ UltraSonicDistanceSensor distanceSensor(trigger_pin, echo_pin); // Инициа�
 
 #define WIFI_SSID "you-ssid"
 #define WIFI_PASSWORD "you-password"
-#define BOTtoken "you-token" // give key: https:// core.telegram.org/bots#6-botfather
+#define BOTtoken "you-token" // give key: https://core.telegram.org/bots#6-botfather
 
 #define LED_PIN 2
 #define RELAY_PIN D8
