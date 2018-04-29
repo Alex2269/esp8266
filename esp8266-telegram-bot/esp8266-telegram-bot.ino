@@ -23,7 +23,7 @@ UltraSonicDistanceSensor distanceSensor(trigger_pin, echo_pin); // Инициа�
 
 #define WIFI_SSID "you-ssid"
 #define WIFI_PASSWORD "you-password"
-#define BOTtoken "you-token:xxxxxxxxxxxxxxxxxxxxxxxxxx" // give key: https:// core.telegram.org/bots#6-botfather
+#define BOTtoken "you-token:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // give key: https:// core.telegram.org/bots#6-botfather
 
 #define LED_PIN 2
 #define RELAY_PIN D8
@@ -56,15 +56,15 @@ void sender_message(void)
     return;
   }
 
-  if (distanceSensor.measureDistanceCm() < distance_min) // если расстояние меньше distance_min, то отправляем сообщение
+  if ((uint16_t)distanceSensor.measureDistanceCm() < distance_min) // если расстояние меньше distance_min, то отправляем сообщение
   {
     alarm_count++;
     if(alarm_count>10)alarm_count=0; // ограничение количества сообщений.
     if(alarm_count < 3)
     {
       bot.sendMessage(chat_id, msg_distance, ""); // give chat_id - идентификатор чата которому пойдет сообщение
-      //bot.sendMessage("-182303116", msg_distance, ""); // отправка в канал 1.
-      bot.sendMessage("507356903", msg_distance, ""); // отправка в канал, 2.
+      //bot.sendMessage("you-chat_id_1", msg_distance, ""); // отправка в канал 1.
+      //bot.sendMessage("you-chat_id_2", msg_distance, ""); // отправка в канал 2.
     }
   }
 }
