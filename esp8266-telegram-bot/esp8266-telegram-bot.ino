@@ -1,10 +1,6 @@
 /*******************************************************************
 * An example of bot that receives commands and turns on and off *
-* an LED. *
-* *
-* written by Giacarlo Bacchio (Gianbacchio on Github) *
-* adapted by Brian Lough *
-* https://github.com/alvarowolfx/esp8266-telegram-bot
+* https://github.com/Alex2269/esp8266
 *******************************************************************/
 
 #include <ESP8266WiFi.h>
@@ -21,19 +17,19 @@
 UltraSonicDistanceSensor distanceSensor(trigger_pin, echo_pin); // Инициализируйте датчик, который использует цифровые выводы 12 и 14.
 
 // Initialize Wifi connection to the router
-// bot name:       esp8266x001
+// bot name:       esp8266xxx
 // bot user_name:  @esp8266xxx_bot
 // https://web.telegram.org/#/im?p=@esp8266xxx_bot
 
 #define WIFI_SSID "you-ssid"
 #define WIFI_PASSWORD "you-password"
-#define BOTtoken "you-token" // give key: https://core.telegram.org/bots#6-botfather
+#define BOTtoken "you-tokenxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // give key: https:// core.telegram.org/bots#6-botfather
 
 #define LED_PIN 2
 #define RELAY_PIN D8
 #define DHT_PIN D7
 #define DHTTYPE DHT11
-#define BOT_SCAN_MESSAGE_INTERVAL 1000 // Интервал, для получения новых сообщений
+#define BOT_SCAN_MESSAGE_INTERVAL 4000 // Интервал, для получения новых сообщений
 
 uint16_t distance_min = 80; // минимальная дистанция для отправки сообщения
 
@@ -44,6 +40,34 @@ WiFiClientSecure client;
 
 UniversalTelegramBot bot(BOTtoken, client);
 DHT dht(DHT_PIN, DHTTYPE);
+
+void sender_message(void)
+{
+  uint16_t alarm_count = 0;
+  String chat_id = String(bot.messages[0].chat_id);
+  String text = bot.messages[0].text;
+  // String from_name = bot.messages[0].from_name;
+
+  String msg_distance = " distance: " + (String)distanceSensor.measureDistanceCm() + " centimeter " + " chat_id: " + chat_id + "\n";
+
+  if(text == "/mute") // запрещаем сообщения
+  {
+    alarm_count = 0;
+    return;
+  }
+
+  if (distanceSensor.measureDistanceCm() < distance_min) // если расстояние меньше distance_min, то отправляем сообщение
+  {
+    alarm_count++;
+    if(alarm_count>10)alarm_count=0; // ограничение количества сообщений.
+    if(alarm_count < 3)
+    {
+      bot.sendMessage(chat_id, msg_distance, ""); // give chat_id - идентификатор чата которому пойдет сообщение
+      //bot.sendMessage("you-chat_id_1", msg_distance, ""); // отправка в канал 1.
+      //bot.sendMessage("you-chat_id_2", msg_distance, ""); // отправка в канал 2.
+    }
+  }
+}
 
 // Это рассматривает новые сообщения, которые прибыли
 void handleNewMessages(int numNewMessages)
@@ -185,24 +209,9 @@ void setup()
 
 void loop()
 {
-  uint16_t alarm_count = 0;
   if (millis() > lastTimeScan + BOT_SCAN_MESSAGE_INTERVAL)
   {
-    String chat_id = String(bot.messages[0].chat_id);
-    String message = " distance: " + (String)distanceSensor.measureDistanceCm() + " centimeter " + " chat_id: " + chat_id + "\n";
-    // String text = bot.messages[0].text;
-    // String from_name = bot.messages[0].from_name;
-
-    // отправляем сообщение, если расстояние меннее distance_min и если количество сообщений менее 5
-    if ((distanceSensor.measureDistanceCm()) < distance_min && alarm_count < 5) // если расстояние меньше distance_min, то отправляем сообщение
-    {
-      bot.sendMessage(chat_id, message, ""); // give chat_id - идентификатор чата которому пойдет сообщение
-      bot.sendMessage("номер-вашей-комнаты1", message, ""); // отправка в несколько каналов, комнат.
-      bot.sendMessage("номер-вашей-комнаты2", message, ""); // отправка в несколько каналов, комнат.
-    }
-    alarm_count++;
-    if(alarm_count>25)alarm_count=0; // ограничение количества сообщений.
-
+    sender_message();
     // Serial.print("Checking messages - ");
     int numNewMessages = bot.getUpdates(bot.last_message_received + 1);
     // Serial.println(numNewMessages);
