@@ -17,13 +17,13 @@
 UltraSonicDistanceSensor distanceSensor(trigger_pin, echo_pin); // Инициализируйте датчик, который использует цифровые выводы 12 и 14.
 
 // Initialize Wifi connection to the router
-// bot name:       esp8266xxx
+// bot name:       esp8266x001
 // bot user_name:  @esp8266xxx_bot
 // https://web.telegram.org/#/im?p=@esp8266xxx_bot
 
 #define WIFI_SSID "you-ssid"
 #define WIFI_PASSWORD "you-password"
-#define BOTtoken "you-tokenxxx:xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // give key: https:// core.telegram.org/bots#6-botfather
+#define BOTtoken "you-token:xxxxxxxxxxxxxxxxxxxxxxxxxx" // give key: https:// core.telegram.org/bots#6-botfather
 
 #define LED_PIN 2
 #define RELAY_PIN D8
@@ -63,8 +63,8 @@ void sender_message(void)
     if(alarm_count < 3)
     {
       bot.sendMessage(chat_id, msg_distance, ""); // give chat_id - идентификатор чата которому пойдет сообщение
-      //bot.sendMessage("you-chat_id_1", msg_distance, ""); // отправка в канал 1.
-      //bot.sendMessage("you-chat_id_2", msg_distance, ""); // отправка в канал 2.
+      //bot.sendMessage("-182303116", msg_distance, ""); // отправка в канал 1.
+      bot.sendMessage("507356903", msg_distance, ""); // отправка в канал, 2.
     }
   }
 }
@@ -150,7 +150,7 @@ void handleNewMessages(int numNewMessages)
     // Это создает клавиатуру с вариантами команды
     if (text == "/options")
     {
-      String keyboardJson = "[[\"/distance\"],[\"/ledon\", \"/ledoff\"],[\"/relayon\", \"/relayoff\"],[\"/env\",\"/status\"],[\"/options\"]]";
+      String keyboardJson = "[[\"/distance\", \"/mute\"],[\"/ledon\", \"/ledoff\"],[\"/relayon\", \"/relayoff\"],[\"/env\",\"/status\"],[\"/options\"]]";
       bot.sendMessageWithReplyKeyboard(chat_id, "Выберите один из вариантов", "", keyboardJson, true);
     }
 
@@ -160,6 +160,7 @@ void handleNewMessages(int numNewMessages)
       String welcome = from_name + ", посылаем сообщение боту от esp .\n";
       welcome += "чтобы взаимодействовать с домом, используйте одну из следующих команд.\n\n";
       welcome += "/distance : показать расстояние до объекта \n";
+      welcome += "/mute : запрещает автоматические сообщения, любая последующая команда отменяет ее. \n";
       welcome += "/ledon : включаем светодиод \n";
       welcome += "/ledoff : выключаем светодиод \n";
       welcome += "/relayon : включаем реле \n";
