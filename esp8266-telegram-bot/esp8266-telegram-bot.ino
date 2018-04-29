@@ -23,7 +23,7 @@ UltraSonicDistanceSensor distanceSensor(trigger_pin, echo_pin); // Инициа�
 // Initialize Wifi connection to the router
 // bot name:       esp8266x001
 // bot user_name:  @esp8266xxx_bot
-// https:// web.telegram.org/#/im?p=@esp8266xxx_bot
+// https://web.telegram.org/#/im?p=@esp8266xxx_bot
 
 #define WIFI_SSID "you-ssid"
 #define WIFI_PASSWORD "you-password"
