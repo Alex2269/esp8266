@@ -50,21 +50,15 @@ void sender_message(void)
 
   String msg_distance = " distance: " + (String)distanceSensor.measureDistanceCm() + " centimeter " + " chat_id: " + chat_id + "\n";
 
-  if(text == "/mute") // запрещаем сообщения
-  {
-    alarm_count = 0;
-    return;
-  }
-
   if ((uint16_t)distanceSensor.measureDistanceCm() < distance_min) // если расстояние меньше distance_min, то отправляем сообщение
   {
     alarm_count++;
     if(alarm_count>10)alarm_count=0; // ограничение количества сообщений.
-    if(alarm_count < 3)
+    if(alarm_count < 3 && text != "/mute")
     {
       bot.sendMessage(chat_id, msg_distance, ""); // give chat_id - идентификатор чата которому пойдет сообщение
-      //bot.sendMessage("you-chat_id_1", msg_distance, ""); // отправка в канал 1.
-      //bot.sendMessage("you-chat_id_2", msg_distance, ""); // отправка в канал 2.
+      bot.sendMessage("you-chat_id-1", msg_distance, ""); // отправка в канал 1.
+      bot.sendMessage("you-chat_id-2", msg_distance, ""); // отправка в канал 2.
     }
   }
 }
