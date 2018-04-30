@@ -23,7 +23,7 @@ UltraSonicDistanceSensor distanceSensor(trigger_pin, echo_pin); // Инициа�
 
 #define WIFI_SSID "you-ssid"
 #define WIFI_PASSWORD "you-password"
-#define BOTtoken "you-token:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // give key: https:// core.telegram.org/bots#6-botfather
+#define BOTtoken "you-token:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // give key: https://core.telegram.org/bots#6-botfather
 
 #define LED_PIN 2
 #define RELAY_PIN D8
