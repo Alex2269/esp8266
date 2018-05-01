@@ -55,12 +55,12 @@ void sender_message(void)
     return;
   }
 
-  if (distance > distance_min)
+  if(distance > distance_min)
   {
     return;
   }
 
-  if (distance < distance_min) // если расстояние меньше distance_min, то отправляем сообщение, и блокируем дальнейший спам
+  if(distance < distance_min) // если расстояние меньше distance_min, то отправляем сообщение, и блокируем дальнейший спам
   {
     bot.messages[0].text = "/mute";
   }
@@ -82,41 +82,41 @@ void handleNewMessages(int numNewMessages)
     String text = bot.messages[i].text;
     String from_name = bot.messages[i].from_name;
 
-    if (from_name == "") from_name = "вводите команду";
+    if(from_name == "") from_name = "вводите команду";
     // идентификация полученных команд
 
-    if (text == "/distance")
+    if(text == "/distance")
     {
       bot.sendMessage(chat_id, (String)distanceSensor.measureDistanceCm(), "");
     }
 
-    if (text == "/ledon")
+    if(text == "/ledon")
     {
       digitalWrite(LED_PIN, HIGH); // turn the LED on (HIGH is the voltage level)
       ledStatus = true;
       bot.sendMessage(chat_id, "светодиод включен", "");
     }
-    if (text == "/ledoff")
+    if(text == "/ledoff")
     {
       ledStatus = false;
       digitalWrite(LED_PIN, LOW); // turn the LED off (LOW is the voltage level)
       bot.sendMessage(chat_id, "светодиод выключен", "");
     }
 
-    if (text == "/relayon")
+    if(text == "/relayon")
     {
       digitalWrite(RELAY_PIN, HIGH);
       relayStatus = true;
       bot.sendMessage(chat_id, "реле включено", "");
     }
-    if (text == "/relayoff")
+    if(text == "/relayoff")
     {
       relayStatus = false;
       digitalWrite(RELAY_PIN, LOW);
       bot.sendMessage(chat_id, "реле выключено", "");
     }
 
-    if (text == "/status")
+    if(text == "/status")
     {
       String message = "светодиод ";
       if(ledStatus)
@@ -150,14 +150,14 @@ void handleNewMessages(int numNewMessages)
       bot.sendMessage(chat_id, message, "Markdown");
     }
     // Это создает клавиатуру с вариантами команды
-    if (text == "/options")
+    if(text == "/options")
     {
       String keyboardJson = "[[\"/distance\", \"/mute\"],[\"/ledon\", \"/ledoff\"],[\"/relayon\", \"/relayoff\"],[\"/env\",\"/status\"],[\"/options\"]]";
       bot.sendMessageWithReplyKeyboard(chat_id, "Выберите один из вариантов", "", keyboardJson, true);
     }
 
     // Группа команд обращенного к устройству
-    if (text == "/start")
+    if(text == "/start")
     {
       String welcome = from_name + ", посылаем сообщение боту от esp .\n";
       welcome += "чтобы взаимодействовать с домом, используйте одну из следующих команд.\n\n";
@@ -212,7 +212,7 @@ void setup()
 
 void loop()
 {
-  if (millis() > lastTimeScan + BOT_SCAN_MESSAGE_INTERVAL)
+  if(millis() > lastTimeScan + BOT_SCAN_MESSAGE_INTERVAL)
   {
     sender_message();
     // Serial.print("Checking messages - ");
