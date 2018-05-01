@@ -51,7 +51,7 @@ void sender_message(void)
   if(text == "/mute") return;
   if(distance > distance_min) return;
 
-  bot.messages[0].text = "/mute"; // блокируем поаторные отправки
+  bot.messages[0].text = "/mute"; // блокируем повторные отправки
   String msg_distance = " distance: " + (String)distance + " centimeter " + " chat_id: " + chat_id + "\n";
   bot.sendMessage(chat_id, msg_distance, ""); // give chat_id - идентификатор чата которому пойдет сообщение
   //bot.sendMessage("you-chat_id_l", msg_distance, ""); // отправка в канал 1.
