@@ -31,9 +31,6 @@ UltraSonicDistanceSensor distanceSensor(trigger_pin, echo_pin); // Инициа�
 #define DHTTYPE DHT11
 #define BOT_SCAN_MESSAGE_INTERVAL 1000 // Интервал, для получения новых сообщений
 
-uint16_t distance_min = 80; // минимальная дистанция для отправки сообщения
-uint16_t distance = 0; // дистанция
-  
 long lastTimeScan; // время, после последнего сообщения
 bool ledStatus = false; // статус светодиода
 bool relayStatus = false; // статус реле
@@ -48,7 +45,8 @@ void sender_message(void)
   String text = bot.messages[0].text;
   // String from_name = bot.messages[0].from_name;
 
-  distance = (uint16_t)distanceSensor.measureDistanceCm();
+  uint16_t distance_min = 80; // минимальная дистанция для отправки сообщения
+  uint16_t distance = (uint16_t)distanceSensor.measureDistanceCm();
 
   if(text == "/mute") return;
   if(distance > distance_min) return;
