@@ -156,7 +156,7 @@ void handleNewMessages(int numNewMessages)
       bot.sendMessageWithReplyKeyboard(chat_id, "Выберите один из вариантов", "", keyboardJson, true);
     }
 
-    // Группа команд обращенного к устройству
+    // Группа команд обращений к устройству
     if(text == "/start")
     {
       String welcome = from_name + ", посылаем сообщение боту от esp .\n";
