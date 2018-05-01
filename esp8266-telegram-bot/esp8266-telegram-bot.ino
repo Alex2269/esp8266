@@ -67,8 +67,8 @@ void sender_message(void)
 
   String msg_distance = " distance: " + (String)distance + " centimeter " + " chat_id: " + chat_id + "\n";
   bot.sendMessage(chat_id, msg_distance, ""); // give chat_id - идентификатор чата которому пойдет сообщение
-  bot.sendMessage("you-chat_id_l", msg_distance, ""); // отправка в канал 1.
-  bot.sendMessage("you-chat_id_2", msg_distance, ""); // отправка в канал 2.
+  //bot.sendMessage("you-chat_id_l", msg_distance, ""); // отправка в канал 1.
+  //bot.sendMessage("you-chat_id_2", msg_distance, ""); // отправка в канал 2.
 }
 
 // Это рассматривает новые сообщения, которые прибыли
