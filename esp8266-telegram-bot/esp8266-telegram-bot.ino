@@ -23,16 +23,17 @@ UltraSonicDistanceSensor distanceSensor(trigger_pin, echo_pin); // Инициа�
 
 #define WIFI_SSID "you-ssid"
 #define WIFI_PASSWORD "you-password"
-#define BOTtoken "you-token:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // give key: https://core.telegram.org/bots#6-botfather
+#define BOTtoken "you-token:xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" // give key: https://core.telegram.org/bots#6-botfather
 
 #define LED_PIN 2
 #define RELAY_PIN D8
 #define DHT_PIN D7
 #define DHTTYPE DHT11
-#define BOT_SCAN_MESSAGE_INTERVAL 4000 // Интервал, для получения новых сообщений
+#define BOT_SCAN_MESSAGE_INTERVAL 1000 // Интервал, для получения новых сообщений
 
 uint16_t distance_min = 80; // минимальная дистанция для отправки сообщения
-
+uint16_t distance = 0; // дистанция
+  
 long lastTimeScan; // время, после последнего сообщения
 bool ledStatus = false; // статус светодиода
 bool relayStatus = false; // статус реле
@@ -43,24 +44,31 @@ DHT dht(DHT_PIN, DHTTYPE);
 
 void sender_message(void)
 {
-  uint16_t alarm_count = 0;
   String chat_id = String(bot.messages[0].chat_id);
   String text = bot.messages[0].text;
   // String from_name = bot.messages[0].from_name;
 
-  String msg_distance = " distance: " + (String)distanceSensor.measureDistanceCm() + " centimeter " + " chat_id: " + chat_id + "\n";
+  distance = (uint16_t)distanceSensor.measureDistanceCm();
 
-  if ((uint16_t)distanceSensor.measureDistanceCm() < distance_min) // если расстояние меньше distance_min, то отправляем сообщение
+  if(text == "/mute")
   {
-    alarm_count++;
-    if(alarm_count>10)alarm_count=0; // ограничение количества сообщений.
-    if(alarm_count < 3 && text != "/mute")
-    {
-      bot.sendMessage(chat_id, msg_distance, ""); // give chat_id - идентификатор чата которому пойдет сообщение
-      bot.sendMessage("you-chat_id-1", msg_distance, ""); // отправка в канал 1.
-      bot.sendMessage("you-chat_id-2", msg_distance, ""); // отправка в канал 2.
-    }
+    return;
   }
+
+  if (distance > distance_min)
+  {
+    return;
+  }
+
+  if (distance < distance_min) // если расстояние меньше distance_min, то отправляем сообщение, и блокируем дальнейший спам
+  {
+    bot.messages[0].text = "/mute";
+  }
+
+  String msg_distance = " distance: " + (String)distance + " centimeter " + " chat_id: " + chat_id + "\n";
+  bot.sendMessage(chat_id, msg_distance, ""); // give chat_id - идентификатор чата которому пойдет сообщение
+  bot.sendMessage("you-chat_id_l", msg_distance, ""); // отправка в канал 1.
+  bot.sendMessage("you-chat_id_2", msg_distance, ""); // отправка в канал 2.
 }
 
 // Это рассматривает новые сообщения, которые прибыли
