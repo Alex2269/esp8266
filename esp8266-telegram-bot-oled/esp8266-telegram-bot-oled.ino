@@ -90,7 +90,6 @@ void sender_message(void)
   //sprintf(buf, "%d.%d.%d.%d", WiFi.localIP()[0], WiFi.localIP()[1], WiFi.localIP()[2], WiFi.localIP()[3]);
   oled.putString(buf);
 
-
   if(text == "/mute") return;
   if(distance > distance_min) return;
 
