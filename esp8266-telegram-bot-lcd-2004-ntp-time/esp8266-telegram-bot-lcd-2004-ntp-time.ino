@@ -20,9 +20,9 @@ NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", 10800, 60000);
 // The library allows to control I2C displays with functions extremely similar to LiquidCrystal library
 // https://github.com/marcoschwartz/LiquidCrystal_I2C
 // display connect: SCL-esp8266_pin d1(GPIO5) SDA-esp8266_pin d2(GPIO4)
-#include <Wire.h>
-#define SDA D1
-#define SCL D2
+//#include <Wire.h>
+//#define SDA D1
+//#define SCL D2
 #define i2c_addres 0x3f
 LiquidCrystal_I2C lcd(i2c_addres,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
@@ -229,6 +229,8 @@ void setupPins()
 
 void setup()
 {
+  // Initialize display:
+  //Wire.begin(SDA,SCL); // set i2c pins (Wire.h)
   lcd.init();
   lcd.backlight();
 
