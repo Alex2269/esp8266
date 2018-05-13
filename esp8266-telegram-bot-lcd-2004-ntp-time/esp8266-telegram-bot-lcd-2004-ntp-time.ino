@@ -20,12 +20,15 @@ NTPClient timeClient(ntpUDP, "europe.pool.ntp.org", 10800, 60000);
 // The library allows to control I2C displays with functions extremely similar to LiquidCrystal library
 // https://github.com/marcoschwartz/LiquidCrystal_I2C
 // display connect: SCL-esp8266_pin d1(GPIO5) SDA-esp8266_pin d2(GPIO4)
+#include <Wire.h>
+#define SDA D1
+#define SCL D2
 #define i2c_addres 0x3f
 LiquidCrystal_I2C lcd(i2c_addres,20,4);  // set the LCD address to 0x27 for a 16 chars and 2 line display
 
 // UltraSonic connect:
-#define trigger_pin D6 // 12 esp8266_pin d6
-#define echo_pin    D5 // 14 esp8266_pin d5
+#define trigger_pin D6 // or #define trigger_pin 12
+#define echo_pin    D5 // or #define echo_pin    14
 
 UltraSonicDistanceSensor distanceSensor(trigger_pin, echo_pin); // Инициализируйте датчик, который использует цифровые выводы 12 и 14.
 
