@@ -1,26 +1,25 @@
-#!/bin/sh
+#!/bin/bash
 
-# rm -rf ${HOME}/Arduino
+# rm -rf ${HOME}/Arduino;
 
-mkdir -p ${HOME}/Arduino/hardware/esp8266com
-mkdir -p ${HOME}/Arduino/libraries
+mkdir -p ${HOME}/Arduino/hardware/esp8266com;
+mkdir -p ${HOME}/Arduino/libraries;
 
-#mkdir --parent ${HOME}/Arduino/hardware/esp8266com
-#mkdir --parent ${HOME}/Arduino/libraries
+#mkdir --parent ${HOME}/Arduino/hardware/esp8266com;
+#mkdir --parent ${HOME}/Arduino/libraries;
 
-cd ${HOME}/Arduino/hardware/esp8266com
-git clone https://github.com/esp8266/Arduino.git esp8266
-cd esp8266/tools
-python get.py
+cd ${HOME}/Arduino/hardware/esp8266com;
+git clone https://github.com/esp8266/Arduino.git esp8266;
+cd esp8266/tools;
+python get.py;
 
-cd ${HOME}/Arduino/libraries
-git clone https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot
-git clone https://github.com/bblanchon/ArduinoJson.git
-git clone https://github.com/marcoschwartz/LiquidCrystal_I2C
-git clone https://github.com/adafruit/DHT-sensor-library
-git clone https://github.com/Martinsos/arduino-lib-hc-sr04
-git clone https://github.com/adafruit/Adafruit_Sensor
-git clone https://github.com/arduino-libraries/NTPClient
-git clone https://github.com/acrobotic/Ai_Ardulib_SSD1306
-
+cd ${HOME}/Arduino/libraries;
+git clone https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot;
+git clone https://github.com/bblanchon/ArduinoJson.git;
+git clone https://github.com/marcoschwartz/LiquidCrystal_I2C;
+git clone https://github.com/adafruit/DHT-sensor-library;
+git clone https://github.com/Martinsos/arduino-lib-hc-sr04;
+git clone https://github.com/adafruit/Adafruit_Sensor;
+git clone https://github.com/arduino-libraries/NTPClient;
+git clone https://github.com/acrobotic/Ai_Ardulib_SSD1306;
 
