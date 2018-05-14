@@ -14,4 +14,6 @@ git clone https://github.com/adafruit/Adafruit_Sensor
 git clone https://github.com/arduino-libraries/NTPClient
 git clone https://github.com/acrobotic/Ai_Ardulib_SSD1306
 git clone https://github.com/Behooz-Sirouszad/ESP8266_Gmail_Sender_sirouszad
+git clone https://github.com/adafruit/MAX31850_OneWire
+git clone https://github.com/adafruit/MAX31850_DallasTemp
 
