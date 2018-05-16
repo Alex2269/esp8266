@@ -9,7 +9,6 @@ git clone https://github.com/witnessmenow/Universal-Arduino-Telegram-Bot
 git clone https://github.com/bblanchon/ArduinoJson.git
 git clone https://github.com/marcoschwartz/LiquidCrystal_I2C
 git clone https://github.com/adafruit/DHT-sensor-library
-# git clone https://github.com/gamgine/HCSR04-ultrasonic-sensor-lib
 git clone https://github.com/Martinsos/arduino-lib-hc-sr04
 git clone https://github.com/adafruit/Adafruit_Sensor
 git clone https://github.com/arduino-libraries/NTPClient
